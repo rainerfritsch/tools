@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 
-# config
+# config 
 baseDirectory = str(Path.home())+"/"
 downloadDirectory = baseDirectory + "Downloads/"
 documentDirectory = downloadDirectory + "_Documents/"
