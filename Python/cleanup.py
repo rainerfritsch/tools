@@ -1,24 +1,28 @@
 import os
 from pathlib import Path
+from configparser import ConfigParser
 
+
+parser = ConfigParser()
+parser.read('./config.ini')
 
 # config 
-baseDirectory = str(Path.home())+"/"
-downloadDirectory = baseDirectory + "Downloads/"
-documentDirectory = downloadDirectory + "_Documents/"
-pictureDirectory = downloadDirectory + "_Pictures/"
-installationDirectory= downloadDirectory + "_Installationfiles/"
-musicDirectory = downloadDirectory + "_Music/"
-videoDirectory = downloadDirectory + "_Videos/"
-archiveDirectory = downloadDirectory + "_Archive/"
+baseDirectory = str(Path.home())+os.sep
+downloadDirectory = baseDirectory + parser.get("folder", "downloadDirectory")
+documentDirectory = downloadDirectory + parser.get("folder", "documentDirectory")
+pictureDirectory = downloadDirectory + parser.get("folder", "pictureDirectory")
+installationDirectory= downloadDirectory + parser.get("folder", "installationDirectory")
+musicDirectory = downloadDirectory + parser.get("folder", "musicDirectory")
+videoDirectory = downloadDirectory + parser.get("folder", "videoDirectory")
+archiveDirectory = downloadDirectory + parser.get("folder", "archiveDirectory")
 
 # files ending with this ending fall into that category
-txtfiles=".txt,.doc,.pdf,.xlsx"
-musicfiles=".mp3,.wav"
-installationfiles=".dmg,.iso,.exe"
-videofiles=".mp4"
-picturefiles=".jpg,.jpeg,.png"
-archivefiles=".zip,.tar,.gz,.bz2"
+txtfiles=parser.get("sorting", "txtfiles")
+musicfiles=parser.get("sorting", "musicfiles")
+installationfiles=parser.get("sorting", "installationfiles")
+videofiles=parser.get("sorting", "videofiles")
+picturefiles=parser.get("sorting", "picturefiles")
+archivefiles=parser.get("sorting", "archivefiles")
 
 # decide if file ends with given fileending
 def kindOf(filename, endings):
